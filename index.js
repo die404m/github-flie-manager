@@ -1273,6 +1273,72 @@ function getFileManagerHTML(currentPathConfig, allPathConfigs, env) {
         .path-nav .btn.active { background: #3498db; }
         .path-nav .btn:hover { background: #7f8c8d; }
         .path-nav .btn.active:hover { background: #2980b9; }
+        
+        /* 文件名溢出处理 */
+        .filename-cell {
+            max-width: 300px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        /* 移动端响应式设计 */
+        @media (max-width: 768px) {
+            .container { padding: 10px; }
+            .header { padding: 15px; }
+            .header h1 { font-size: 1.5rem; margin-bottom: 10px; }
+            .path-nav { flex-direction: column; gap: 5px; }
+            .path-nav .btn { 
+                width: 100%; 
+                text-align: center; 
+                padding: 10px; 
+                font-size: 0.9rem;
+                margin: 2px 0;
+            }
+            .upload-section input[type="text"] { width: 100%; max-width: 300px; }
+            .file-list { grid-template-columns: 1fr; }
+            .file-item { padding: 8px; }
+            .file-actions { flex-direction: column; gap: 5px; }
+            .file-actions .btn { width: 100%; margin: 2px 0; }
+            
+            /* 移动端表格优化 */
+            table { font-size: 0.9rem; }
+            th, td { padding: 8px; }
+            .filename-cell { 
+                max-width: 150px; 
+                word-wrap: break-word;
+                white-space: normal;
+                line-height: 1.3;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header h1 { font-size: 1.3rem; }
+            .header p { font-size: 0.9rem; }
+            .path-nav .btn { font-size: 0.85rem; padding: 8px; }
+            .btn { padding: 8px 16px; font-size: 0.9rem; }
+            .file-item { flex-direction: column; align-items: flex-start; }
+            .file-info { width: 100%; margin-bottom: 8px; }
+            .file-actions { width: 100%; }
+            
+            /* 超小屏幕表格优化 */
+            table { font-size: 0.8rem; }
+            th, td { padding: 6px; }
+            .filename-cell { 
+                max-width: 100px; 
+                word-wrap: break-word;
+                white-space: normal;
+                line-height: 1.2;
+                font-size: 0.85rem;
+            }
+            
+            /* 操作按钮优化 */
+            .file-actions .btn { 
+                font-size: 0.8rem; 
+                padding: 6px 12px; 
+                margin: 1px 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1550,6 +1616,7 @@ function getFileManagerHTML(currentPathConfig, allPathConfigs, env) {
                             
                             // 安全地创建DOM元素，避免innerHTML的XSS风险
                             const nameCell = row.insertCell();
+                            nameCell.className = 'filename-cell';
                             nameCell.textContent = file.name;
                             
                             const sizeCell = row.insertCell();
