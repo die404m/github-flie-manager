@@ -5,8 +5,8 @@ compatibility_date = "2024-01-01"
 # 环境变量配置
 [vars]
 GITHUB_TOKEN = "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、"
-GITHUB_OWNER = "Wan-s-Mcweb"
-GITHUB_REPO = "repo"
+GITHUB_OWNER = "die404m"
+GITHUB_REPO = "Wan-s-Mcweb"
 GITHUB_BRANCH = "main"
 GITHUB_PATH1 = "public/assets/gallery-images"
 GITHUB_PATH1_NAME = "相册"
